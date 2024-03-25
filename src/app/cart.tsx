@@ -11,7 +11,7 @@ type state = {
 };
 
 type item = {
-  id: string;
+  _id: string;
   name: string;
   price: number;
   image: string;
@@ -91,7 +91,7 @@ const Cart:React.FC<CartProp> = ({remove}) => {
                       </button>
                       <button
                         onClick={() => {
-                          RemoveItem(Item.id);
+                          RemoveItem(Item._id);
                         }}
                         className="md:backdrop:text-2xl border-black md:px-4 px-1 py-[0.15rem] md:py-2 border hover:bg-black hover:text-white"
                       >
