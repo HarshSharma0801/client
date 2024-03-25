@@ -23,6 +23,7 @@ const Cart:React.FC<CartProp> = ({remove}) => {
   const Items = useSelector((state: state) => state.Cart.items);
   const TotalPrice = useSelector((state: state) => state.Cart.totalAmount);
 
+  console.log(Items)
   const AddItem = (data: item) => {
     dispatch(CartActions.AddToCart(data));
   };

@@ -65,14 +65,14 @@ return <>
                    
                       </span>{" "}
                     </p>
-                    <p>
+                   
                       <Link
                       href={`/product/${Item._id}`}
                         className="text-base text-black hover:underline"
                       >
                         view details
                       </Link>
-                    </p>
+                   
                   </div>
                 </div>
               </Card>
