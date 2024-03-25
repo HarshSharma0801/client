@@ -1,6 +1,5 @@
 'use server'
 
-import axios from 'axios'
 
 interface Item {
   _id: string,
@@ -16,9 +15,11 @@ interface Item {
 
 export const getItems = async (): Promise<Item[]> => {
   try {
-    const response = await axios.get('/items');
-    if (response.data.items) {
-      return response.data.items;
+    const response =  await fetch('https://bid-rush.vercel.app/items');
+    const res = await response.json();
+
+    if (res.items) {
+      return res.items;
     }
     return [];
   } catch (error) {
