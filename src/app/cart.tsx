@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { CartActions } from "@/redux/reducers/CartSlice";
 
 interface CartProp{
-    remove : ()=> void
+     remove : ()=> void
 }
 
 type state = {
