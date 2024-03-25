@@ -1,5 +1,6 @@
 import { getItems } from "./getItems";
 import { useState , useEffect } from "react";
+import { Card } from "@/design/Card";
 import Link from "next/link";
 interface Item {
   _id: string;
@@ -14,16 +15,29 @@ interface Item {
 }
 
 export const Display = async()=>{
-
+  const variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
 
 const Items:Item[] = await getItems();
 
 return <>
  <div className="grid grid-cols-1 md:grid-cols-4 gap-6 m-6 p-5">
         {Items.length > 0 &&
-          Items.map((Item:Item) => {
+          Items.map((Item:Item , index) => {
             return (
-              <div className=" md:mt-2 md:w-[300px] md:h-[320px] w-[250px]  h-[308px]  bg-white border border-gray-300 rounded-lg  shadow-2xl dark:bg-gray-800 dark:border-gray-700 ">
+              <Card 
+              variants={variants}
+              initial="hidden"
+              animate="visible"
+              transition={{
+                delay: index*0.25,
+                ease: "easeInOut",
+                duration: 0.5,
+              }}
+              viewport={{ amount: 0 }}
+              className=" md:mt-2 md:w-[300px] md:h-[320px] w-[250px]  h-[308px]  bg-white border border-gray-300 rounded-lg  shadow-2xl dark:bg-gray-800 dark:border-gray-700 ">
                 <div className="bg-gray-200 aspect-video	 rounded-lg overflow-hidden">
                   <img
                     src={Item.Images[0]}
@@ -61,7 +75,7 @@ return <>
                     </p>
                   </div>
                 </div>
-              </div>
+              </Card>
             );
           })}
       </div>

@@ -5,7 +5,7 @@ import Header from "@/app/Header";
 import { getItem } from "@/app/getItems";
 import { UseDispatch, useDispatch } from "react-redux";
 import { CartActions } from "@/redux/reducers/CartSlice";
-
+import { Card } from "@/design/Card";
 interface item {
   _id: string;
   Owner: string;
@@ -26,7 +26,10 @@ const Item = await getItem(params.id);
 const AddItem = (data: item) => {
   dispatch(CartActions.AddToCart(data));
 };
-
+const variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
 
 
   return (
@@ -57,11 +60,21 @@ const AddItem = (data: item) => {
         </div>
         <div className="flex md:flex-row justify-center flex-col gap-8">
           {Item &&
-            Item.Images.map((image) => {
+            Item.Images.map((image , index) => {
               return (
-                <div className="bg-gray-200 aspect-video md:w-[300px] md:h-[320px] w-[250px]  h-[308px] rounded-lg overflow-hidden">
+                <Card 
+                variants={variants}
+              initial="hidden"
+              animate="visible"
+              transition={{
+                delay: index*0.25,
+                ease: "easeInOut",
+                duration: 0.5,
+              }}
+              viewport={{ amount: 0 }}
+                className="bg-gray-200 aspect-video md:w-[300px] md:h-[320px] w-[250px]  h-[308px] rounded-lg overflow-hidden">
                   <img src={image} alt="photo" className="p-2 w-full h-full" />
-                </div>
+                </Card>
               );
             })}
         </div>
