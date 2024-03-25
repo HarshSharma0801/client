@@ -15,7 +15,6 @@ const Cart = createSlice({
     reducers:{
         AddToCart(state,action){
          const newItem = action.payload;
-         console.log(newItem)
          const existingItem = state.items.find(data=> data.id === newItem.id);
          state.totalQuantity++;
          state.totalAmount=Number(state.totalAmount) + Number(newItem.price) ; 
