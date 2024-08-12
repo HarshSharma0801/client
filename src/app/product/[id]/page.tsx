@@ -1,9 +1,10 @@
 
 'use client'
-import { useEffect, useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from "@/app/Header";
 import { getItem } from "@/app/getItems";
-import { UseDispatch, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { CartActions } from "@/redux/reducers/CartSlice";
 import { Card } from "@/design/Card";
 interface item {
@@ -24,6 +25,7 @@ const SingleItem = async({params}:{params:{id:string}}) => {
 const Item = await getItem(params.id);
   
 const AddItem = (data: item) => {
+  toast.success("Product added to Cart !");
   dispatch(CartActions.AddToCart(data));
 };
 const variants = {
@@ -35,6 +37,7 @@ const variants = {
   return (
     <>
       <Header />
+      <ToastContainer />
       <div className="flex flex-col gap-6 p-6">
         <div className="flex justify-between pr-10">
           <div>

@@ -1,39 +1,38 @@
-'use server'
-
+"use client";
+import axios from "axios";
 
 interface Item {
-  _id: string,
-  Owner: string,
-  ItemName: string,
-  description: string,
-  price: string,
-  category: string,
-  features: string[],
-  Images: string[],
-  __v: number,
+  _id: string;
+  Owner: string;
+  ItemName: string;
+  description: string;
+  price: string;
+  category: string;
+  features: string[];
+  Images: string[];
+  __v: number;
 }
 
 export const getItems = async (): Promise<Item[]> => {
   try {
-    const response =  await fetch('https://bid-rush.vercel.app/items');
-    const res = await response.json();
+    const { data } = await axios.get("https://bid-rush.vercel.app/items");
 
-    if (res.items) {
-      return res.items;
+    if (data.items) {
+      return data.items;
     }
     return [];
   } catch (error) {
-    console.error('Error fetching items:', error);
+    console.error("Error fetching items:", error);
     throw error;
   }
 };
 
-
-export const getItem = async (id:string) :Promise<Item>=> {
-  const response = await fetch(`https://bid-rush.vercel.app/singleitem/${id}`);
-  const res = await response.json();
-  if(res){
-    return res.item
+export const getItem = async (id: string): Promise<Item> => {
+  const { data } = await axios.get(
+    `https://bid-rush.vercel.app/singleitem/${id}`
+  );
+  if (data) {
+    return data.item;
   }
   return {
     _id: "",
@@ -44,7 +43,6 @@ export const getItem = async (id:string) :Promise<Item>=> {
     category: "",
     features: [],
     Images: [],
-    __v: 0
-  }
-  
+    __v: 0,
+  };
 };
